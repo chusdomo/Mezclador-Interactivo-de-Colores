@@ -15,13 +15,14 @@
 
     h2, h3 {
       margin-top: 30px;
+      font-size: 24px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     th, td {
@@ -30,12 +31,12 @@
       text-align: left;
     }
 
-    /* Botones de color grandes y táctiles */
+    /* Botones de color grandes y pulsables */
     .color-sample-btn {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       display: block;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 3px solid transparent;
       cursor: pointer;
       transition: border 0.2s;
@@ -50,24 +51,25 @@
       background-color: #f5f5f5;
     }
 
-    /* En móviles, ocultar columnas poco esenciales */
-    @media (max-width: 600px) {
-      td:nth-child(3), /* Código HEX */
-      th:nth-child(3),
-      td:nth-child(4), /* Composición */
-      th:nth-child(4) {
-        display: none;
-      }
+    .color-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .color-hex {
+      font-size: 16px;
+      color: #555;
+      cursor: pointer;
+      user-select: all;
+    }
+
+    .color-hex:hover {
+      color: #007BFF;
     }
 
     /* Estilos mezclador */
     .color-list {
       margin: 20px 0;
-    }
-
-    .color-label {
-      font-size: 14px;
-      margin-right: 10px;
     }
 
     .percent-display {
@@ -76,6 +78,7 @@
       text-align: right;
       font-family: monospace;
       font-weight: bold;
+      font-size: 18px;
     }
 
     .slider-container {
@@ -96,32 +99,51 @@
     button {
       margin-top: 15px;
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 18px;
+    }
+
+    .reset-button {
+      margin-left: 15px;
+      vertical-align: middle;
+    }
+
+    .color-label {
+      font-size: 18px;
+      margin-right: 10px;
     }
 
     /* Responsive para móviles */
     @media (max-width: 600px) {
+      table {
+        font-size: 16px;
+      }
+
       .color-sample-btn {
         width: 80px;
         height: 80px;
         margin: 15px auto;
       }
 
-      .color-label {
-        font-size: 16px;
-        width: 140px;
+      .color-name {
+        font-size: 20px;
       }
 
-      input[type=range] {
-        width: 80%;
+      .color-hex {
+        font-size: 16px;
+      }
+
+      .color-label {
+        font-size: 20px;
+        width: 150px;
       }
 
       .percent-display {
         width: 50px;
+        font-size: 20px;
       }
 
-      table {
-        font-size: 13px;
+      input[type=range] {
+        width: 90%;
       }
     }
   </style>
@@ -139,130 +161,96 @@
     <tr>
       <th>Nombre</th>
       <th>Color</th>
-      <th>Código HEX</th>
       <th>Composición RYB</th>
-      <th>Nombre coloquial</th>
     </tr>
   </thead>
   <tbody>
     <!-- PRIMARIOS -->
     <tr>
-      <td>Rojo</td>
+      <td><div class="color-name">Rojo</div><div class="color-hex" onclick="copiarHex('#FF0000')">HEX: #FF0000</div></td>
       <td><div class="color-sample-btn" style="background-color:#FF0000" title="Rojo puro" onclick="agregarColor('#FF0000', 'Rojo', this)"></div></td>
-      <td>#FF0000</td>
       <td>Rojo (100%)</td>
-      <td>Rojo puro</td>
     </tr>
     <tr>
-      <td>Amarillo</td>
+      <td><div class="color-name">Amarillo</div><div class="color-hex" onclick="copiarHex('#FFFF00')">HEX: #FFFF00</div></td>
       <td><div class="color-sample-btn" style="background-color:#FFFF00" title="Amarillo puro" onclick="agregarColor('#FFFF00', 'Amarillo', this)"></div></td>
-      <td>#FFFF00</td>
       <td>Amarillo (100%)</td>
-      <td>Amarillo puro</td>
     </tr>
     <tr>
-      <td>Azul</td>
-      <td><div class="color-sample-btn" style="background-color:#0000FF" title="Azul profundo" onclick="agregarColor('#0000FF', 'Azul', this)"></div></td>
-      <td>#0000FF</td>
+      <td><div class="color-name">Azul</div><div class="color-hex" onclick="copiarHex('#0000FF')">HEX: #0000FF</div></td>
+      <td><div class="color-sample-btn" style="background-color:#0000FF" title="Azul cobalto" onclick="agregarColor('#0000FF', 'Azul', this)"></div></td>
       <td>Azul (100%)</td>
-      <td>Azul cobalto</td>
     </tr>
 
     <!-- SECUNDARIOS -->
     <tr>
-      <td>Naranja</td>
+      <td><div class="color-name">Naranja</div><div class="color-hex" onclick="copiarHex('#FFA500')">HEX: #FFA500</div></td>
       <td><div class="color-sample-btn" style="background-color:#FFA500" title="Naranja clásico" onclick="agregarColor('#FFA500', 'Naranja', this)"></div></td>
-      <td>#FFA500</td>
       <td>Rojo (50%), Amarillo (50%)</td>
-      <td>Naranja clásico</td>
     </tr>
     <tr>
-      <td>Verde</td>
+      <td><div class="color-name">Verde</div><div class="color-hex" onclick="copiarHex('#008000')">HEX: #008000</div></td>
       <td><div class="color-sample-btn" style="background-color:#008000" title="Verde oscuro" onclick="agregarColor('#008000', 'Verde', this)"></div></td>
-      <td>#008000</td>
       <td>Amarillo (50%), Azul (50%)</td>
-      <td>Verde oscuro</td>
     </tr>
     <tr>
-      <td>Morado</td>
+      <td><div class="color-name">Morado</div><div class="color-hex" onclick="copiarHex('#800080')">HEX: #800080</div></td>
       <td><div class="color-sample-btn" style="background-color:#800080" title="Violeta fuerte" onclick="agregarColor('#800080', 'Morado', this)"></div></td>
-      <td>#800080</td>
       <td>Rojo (50%), Azul (50%)</td>
-      <td>Violeta fuerte</td>
     </tr>
 
     <!-- TERCIARIOS -->
     <tr>
-      <td>Rojo-Naranja</td>
+      <td><div class="color-name">Rojo-Naranja</div><div class="color-hex" onclick="copiarHex('#FF4500')">HEX: #FF4500</div></td>
       <td><div class="color-sample-btn" style="background-color:#FF4500" title="Carne / Naranja cálido" onclick="agregarColor('#FF4500', 'Rojo-Naranja', this)"></div></td>
-      <td>#FF4500</td>
       <td>Rojo (75%), Amarillo (25%)</td>
-      <td>Carne</td>
     </tr>
     <tr>
-      <td>Amarillo-Naranja</td>
+      <td><div class="color-name">Amarillo-Naranja</div><div class="color-hex" onclick="copiarHex('#F9A825')">HEX: #F9A825</div></td>
       <td><div class="color-sample-btn" style="background-color:#F9A825" title="Ámbar / Oro viejo" onclick="agregarColor('#F9A825', 'Amarillo-Naranja', this)"></div></td>
-      <td>#F9A825</td>
       <td>Amarillo (75%), Rojo (25%)</td>
-      <td>Ámbar / Oro viejo</td>
     </tr>
     <tr>
-      <td>Amarillo-Verde</td>
+      <td><div class="color-name">Amarillo-Verde</div><div class="color-hex" onclick="copiarHex('#7FFF00')">HEX: #7FFF00</div></td>
       <td><div class="color-sample-btn" style="background-color:#7FFF00" title="Verde lima" onclick="agregarColor('#7FFF00', 'Amarillo-Verde', this)"></div></td>
-      <td>#7FFF00</td>
       <td>Amarillo (75%), Azul (25%)</td>
-      <td>Verde lima</td>
     </tr>
     <tr>
-      <td>Azul-Verde</td>
+      <td><div class="color-name">Azul-Verde</div><div class="color-hex" onclick="copiarHex('#008B8B')">HEX: #008B8B</div></td>
       <td><div class="color-sample-btn" style="background-color:#008B8B" title="Verde azulado" onclick="agregarColor('#008B8B', 'Azul-Verde', this)"></div></td>
-      <td>#008B8B</td>
       <td>Azul (75%), Amarillo (25%)</td>
-      <td>Verde azulado</td>
     </tr>
     <tr>
-      <td>Azul-Morado</td>
+      <td><div class="color-name">Azul-Morado</div><div class="color-hex" onclick="copiarHex('#4B0082')">HEX: #4B0082</div></td>
       <td><div class="color-sample-btn" style="background-color:#4B0082" title="Índigo" onclick="agregarColor('#4B0082', 'Azul-Morado', this)"></div></td>
-      <td>#4B0082</td>
       <td>Azul (75%), Rojo (25%)</td>
-      <td>Índigo</td>
     </tr>
     <tr>
-      <td>Rojo-Morado</td>
+      <td><div class="color-name">Rojo-Morado</div><div class="color-hex" onclick="copiarHex('#9370DB')">HEX: #9370DB</div></td>
       <td><div class="color-sample-btn" style="background-color:#9370DB" title="Lavanda" onclick="agregarColor('#9370DB', 'Rojo-Morado', this)"></div></td>
-      <td>#9370DB</td>
       <td>Rojo (75%), Azul (25%)</td>
-      <td>Lavanda</td>
     </tr>
 
     <!-- TERCIARIOS CLAROS -->
     <tr>
-      <td>Rojo-Morado Claro</td>
+      <td><div class="color-name">Rosa Suave</div><div class="color-hex" onclick="copiarHex('#C76FD6')">HEX: #C76FD6</div></td>
       <td><div class="color-sample-btn" style="background-color:#C76FD6" title="Rosa suave" onclick="agregarColor('#C76FD6', 'Rosa Suave', this)"></div></td>
-      <td>#C76FD6</td>
       <td>Rojo (60%), Azul (20%), Blanco (20%)</td>
-      <td>Rosa suave</td>
     </tr>
     <tr>
-      <td>Azul-Morado Claro</td>
+      <td><div class="color-name">Lavanda Clara</div><div class="color-hex" onclick="copiarHex('#A17EBD')">HEX: #A17EBD</div></td>
       <td><div class="color-sample-btn" style="background-color:#A17EBD" title="Lavanda clara" onclick="agregarColor('#A17EBD', 'Lavanda Clara', this)"></div></td>
-      <td>#A17EBD</td>
       <td>Azul (60%), Rojo (20%), Blanco (20%)</td>
-      <td>Lavanda Clara</td>
     </tr>
     <tr>
-      <td>Amarillo-Naranja Claro</td>
+      <td><div class="color-name">Oro Pastel</div><div class="color-hex" onclick="copiarHex('#FACB61')">HEX: #FACB61</div></td>
       <td><div class="color-sample-btn" style="background-color:#FACB61" title="Oro pastel" onclick="agregarColor('#FACB61', 'Oro Pastel', this)"></div></td>
-      <td>#FACB61</td>
       <td>Amarillo (60%), Rojo (20%), Blanco (20%)</td>
-      <td>Oro Pastel</td>
     </tr>
     <tr>
-      <td>Azul-Verde Claro</td>
+      <td><div class="color-name">Verde Agua</div><div class="color-hex" onclick="copiarHex('#7CC0B5')">HEX: #7CC0B5</div></td>
       <td><div class="color-sample-btn" style="background-color:#7CC0B5" title="Verde agua" onclick="agregarColor('#7CC0B5', 'Verde Agua', this)"></div></td>
-      <td>#7CC0B5</td>
       <td>Azul (60%), Amarillo (20%), Blanco (20%)</td>
-      <td>Verde Agua</td>
     </tr>
   </tbody>
 </table>
@@ -281,9 +269,12 @@
   </div>
 </div>
 
-<div id="mix-box"></div>
-<p id="color-hex">Color: #FFFFFF</p>
-<button onclick="descargarColor()">Descargar Color</button>
+<!-- Color final y reset -->
+<div style="text-align: center;">
+  <div id="mix-box"></div>
+  <p id="color-hex">Color: #FFFFFF</p>
+  <button onclick="resetear()">🔄 Reiniciar</button>
+</div>
 
 <script>
   const MAX_COLORES = 6;
@@ -329,6 +320,30 @@
     }
 
     coloresSeleccionados.forEach((color, index) => {
+      // Obtener la composición inicial (de la tabla) o usar valores por defecto
+      let pesoRojo = 0, pesoAmarillo = 0, pesoAzul = 0;
+
+      switch (color.nombre) {
+        case "Rojo": pesoRojo = 100; break;
+        case "Amarillo": pesoAmarillo = 100; break;
+        case "Azul": pesoAzul = 100; break;
+        case "Naranja": pesoRojo = 50; pesoAmarillo = 50; break;
+        case "Verde": pesoAmarillo = 50; pesoAzul = 50; break;
+        case "Morado": pesoRojo = 50; pesoAzul = 50; break;
+        case "Rojo-Naranja": pesoRojo = 75; pesoAmarillo = 25; break;
+        case "Amarillo-Naranja": pesoAmarillo = 75; pesoRojo = 25; break;
+        case "Amarillo-Verde": pesoAmarillo = 75; pesoAzul = 25; break;
+        case "Azul-Verde": pesoAzul = 75; pesoAmarillo = 25; break;
+        case "Azul-Morado": pesoAzul = 75; pesoRojo = 25; break;
+        case "Rojo-Morado": pesoRojo = 75; pesoAzul = 25; break;
+        case "Rosa Suave": pesoRojo = 60; pesoAzul = 20; break;
+        case "Lavanda Clara": pesoAzul = 60; pesoRojo = 20; break;
+        case "Oro Pastel": pesoAmarillo = 60; pesoRojo = 20; break;
+        case "Verde Agua": pesoAzul = 60; pesoAmarillo = 20; break;
+        default:
+          pesoRojo = 25; pesoAmarillo = 25; pesoAzul = 25;
+      }
+
       const div = document.createElement("div");
       div.style.display = "flex";
       div.style.justifyContent = "space-between";
@@ -340,17 +355,22 @@
       label.className = "color-label";
       label.style.width = "130px";
       label.style.textAlign = "left";
+      label.style.fontWeight = "bold";
 
       const percentDisplay = document.createElement("span");
       percentDisplay.className = "percent-display";
       percentDisplay.id = `percent-${index}`;
       percentDisplay.textContent = "25%";
+      percentDisplay.dataset.colorIndex = index;
+      percentDisplay.dataset.rojo = pesoRojo;
+      percentDisplay.dataset.amarillo = pesoAmarillo;
+      percentDisplay.dataset.azul = pesoAzul;
 
       const input = document.createElement("input");
       input.type = "range";
       input.min = "0";
       input.max = "100";
-      input.value = "25";
+      input.value = pesoRojo || pesoAmarillo || pesoAzul ? Math.round(pesoRojo * 0.25 + pesoAmarillo * 0.25 + pesoAzul * 0.25) : "25";
       input.style.flex = "1";
       input.oninput = () => {
         percentDisplay.textContent = `${input.value}%`;
@@ -411,7 +431,7 @@
 
     const hex = rgbToHex(r, g, b);
     document.getElementById("mix-box").style.backgroundColor = `rgb(${r},${g},${b})`;
-    document.getElementById("color-hex").textContent = `Color: ${hex}`;
+    document.getElementById("color-hex").textContent = `Color: ${hex.toUpperCase()}`;
     document.getElementById("blanco-val").textContent = `${document.getElementById("blanco").value}%`;
     document.getElementById("negro-val").textContent = `${document.getElementById("negro").value}%`;
   }
@@ -427,6 +447,21 @@
     link.download = 'color-mezclado.png';
     link.href = canvas.toDataURL();
     link.click();
+  }
+
+  function resetear() {
+    coloresSeleccionados = [];
+    document.querySelectorAll('.color-sample-btn').forEach(btn => btn.classList.remove("selected"));
+    actualizarLista();
+    ajustarMezcla();
+  }
+
+  function copiarHex(hex) {
+    navigator.clipboard.writeText(hex).then(() => {
+      alert("HEX copiado: " + hex);
+    }).catch(err => {
+      prompt("Copia el código:", hex);
+    });
   }
 
   // Inicializar
