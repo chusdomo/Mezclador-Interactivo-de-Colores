@@ -2,28 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎨 Mezclador Interactivo – Colores Base</title>
   <style>
     body {
       font-family: sans-serif;
       padding: 20px;
-      max-width: 900px;
+      max-width: 100%;
       margin: auto;
       text-align: center;
     }
-    h2 {
-      margin-top: 40px;
+
+    h2, h3 {
+      margin-top: 30px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      font-size: 14px;
     }
+
     th, td {
       padding: 10px;
       border: 1px solid #ccc;
       text-align: left;
     }
+
+    /* Botones de color grandes y táctiles */
     .color-sample-btn {
       width: 60px;
       height: 60px;
@@ -32,8 +39,9 @@
       border: 3px solid transparent;
       cursor: pointer;
       transition: border 0.2s;
-      margin: auto;
+      margin: 10px auto;
     }
+
     .color-sample-btn.selected {
       border: 3px solid #333;
     }
@@ -42,18 +50,26 @@
       background-color: #f5f5f5;
     }
 
-    tbody tr:nth-child(even) {
-      background-color: #fafafa;
+    /* En móviles, ocultar columnas poco esenciales */
+    @media (max-width: 600px) {
+      td:nth-child(3), /* Código HEX */
+      th:nth-child(3),
+      td:nth-child(4), /* Composición */
+      th:nth-child(4) {
+        display: none;
+      }
     }
 
     /* Estilos mezclador */
     .color-list {
       margin: 20px 0;
     }
+
     .color-label {
       font-size: 14px;
       margin-right: 10px;
     }
+
     .percent-display {
       display: inline-block;
       width: 40px;
@@ -61,25 +77,52 @@
       font-family: monospace;
       font-weight: bold;
     }
-    .mix-controls {
-      margin-top: 20px;
-    }
+
     .slider-container {
       margin: 10px 0;
     }
+
     input[type=range] {
-      width: 70%;
+      width: 90%;
     }
+
     #mix-box {
       width: 150px;
       height: 150px;
       margin: 20px auto;
       border: 2px solid #ccc;
     }
+
     button {
       margin-top: 15px;
       padding: 10px 20px;
       font-size: 16px;
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 600px) {
+      .color-sample-btn {
+        width: 80px;
+        height: 80px;
+        margin: 15px auto;
+      }
+
+      .color-label {
+        font-size: 16px;
+        width: 140px;
+      }
+
+      input[type=range] {
+        width: 80%;
+      }
+
+      .percent-display {
+        width: 50px;
+      }
+
+      table {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -290,7 +333,7 @@
       div.style.display = "flex";
       div.style.justifyContent = "space-between";
       div.style.alignItems = "center";
-      div.style.marginBottom = "8px";
+      div.style.marginBottom = "10px";
 
       const label = document.createElement("label");
       label.textContent = `${color.nombre}:`;
@@ -331,7 +374,7 @@
 
     const sliders = document.querySelectorAll(".color-list input[type='range']");
     const pesos = Array.from(sliders).map(i => parseInt(i.value) / 100);
-    const total = pesos.reduce((sum, p) => sum + p, 0) || 1;
+    const total = Math.max(1, pesos.reduce((sum, p) => sum + p, 0));
     const pesosNorm = pesos.map(p => p / total);
 
     let rTotal = 0, gTotal = 0, bTotal = 0;
@@ -368,7 +411,7 @@
 
     const hex = rgbToHex(r, g, b);
     document.getElementById("mix-box").style.backgroundColor = `rgb(${r},${g},${b})`;
-    document.getElementById("color-hex").textContent = `Color: ${hex.toUpperCase()}`;
+    document.getElementById("color-hex").textContent = `Color: ${hex}`;
     document.getElementById("blanco-val").textContent = `${document.getElementById("blanco").value}%`;
     document.getElementById("negro-val").textContent = `${document.getElementById("negro").value}%`;
   }
